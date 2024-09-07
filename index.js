@@ -1,19 +1,10 @@
 const express = require('express');
-
-const { negocios } = require('./data'); // 'data' es el nombre del archivo donde está exportado
-
+const routerNegocios = require ('./routers/router')
 
 const app = express()
 const PORT = 3000;
 
-const routerNegocios = express.Router();
-
 app.use('/api/negocios', routerNegocios)
-
-routerNegocios.get('/', function (req, res) {
-  console.log(typeof negocios)
-  res.send(negocios)
-})
 
 routerNegocios.get('/:id', function (req, res) {
   const negocioId = parseInt(req.params.id);
@@ -21,7 +12,7 @@ routerNegocios.get('/:id', function (req, res) {
 
   if (negocio) {
     res.send(negocio);
-  } else {
+  } else {  
     res.status(404).send({ message: 'Negocio no encontrado' });
   }
 });
