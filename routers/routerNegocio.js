@@ -1,5 +1,5 @@
 const express = require('express');
-const { negocios } = require('../data');
+const { negocios } = require('../dataNegocios');
 
 const routerNegocios = express.Router();
 
