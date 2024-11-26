@@ -1,22 +1,10 @@
 const express = require('express');
-const { negocios } = require('../dataNegocios');
+const negocioController = require('../Controllers/controllerNegocios')
 
 const routerNegocios = express.Router();
 
-routerNegocios.get('/', function (req, res) {
-    res.send(negocios)
-})
-
-routerNegocios.get('/:id', async (req, res)=> {
-    let negocioId = parseInt(req.params.id);
-    let negocio = await negocios.find(n => n._id === negocioId);
-  
-    if (negocio) {
-      res.send(negocio);
-    } else {  
-      res.status(404).send({ message: 'Negocio no encontrado' });
-    }
-});
+routerNegocios.get('/', negocioController.readAllnegocios)
+routerNegocios.get('/:id', negocioController.readNegocioId);
 
 routerNegocios.post('/',async  (req,res)=>{
 

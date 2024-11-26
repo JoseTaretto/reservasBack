@@ -8,39 +8,38 @@ routerProducts.get('/', function (req, res) {
 })
 
 routerProducts.get('/:id', async (req, res) => {
-    let negocioId = parseInt(req.params.id);
-    let negocio = await negocios.find(n => n._id === negocioId);
+    let productoId = parseInt(req.params.id);
+    let producto = await Producto.find(n => n._id === productoId);
 
-    if (negocio) {
-        res.send(negocio);
+    if (producto) {
+        res.send(producto);
     } else {
-        res.status(404).send({ message: 'Negocio no encontrado' });
+        res.status(404).send({ message: 'Producto no encontrado' });
     }
 });
 
 routerProducts.post('/', async (req, res) => {
 
     let { _id, name, datetime, img } = req.body;
-
-    let negocio = { _id, name, datetime, img };
-    await negocios.push(negocio);
-    res.status(201).json({ message: 'Negocio agregado con éxito', agregado: negocio.name });
+    let producto = { _id, name, datetime, img };
+    await Producto.push(producto);
+    res.status(201).json({ message: 'Producto agregado con éxito', agregado: producto.name });
 }
 )
 
 routerProducts.delete('/:id', async (req, res) => {
-    const negocioId = parseInt(req.params.id);
+    const productoId = parseInt(req.params.id);
 
-    const index = await negocios.findIndex(n => n._id === negocioId);
+    const index = await Producto.findIndex(n => n._id === productoId);
 
     if (index === -1) {
-        return res.status(404).json({ message: 'Negocio no encontrado' });
+        return res.status(404).json({ message: 'Producto no encontrado' });
     }
 
     // Eliminar el negocio directamente del array usando splice
-    negocios.splice(index, 1);
+    Producto.splice(index, 1);
 
-    res.status(200).json({ message: 'Negocio eliminado con éxito' });
+    res.status(200).json({ message: 'Producto eliminado con éxito' });
 });
 
 module.exports = routerProducts;
