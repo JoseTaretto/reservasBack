@@ -1,10 +1,13 @@
-const express = require('express');
-const routerNegocio = require ('./routers/routerNegocio')
+const routerNegocio = require ('./Routers/routerNegocio')
 const routerProducts = require ('./routers/routerProducts')
+const express = require('express');
+
+
 
 const cors = require('cors');
 
 const app = express()
+app.use(express.json()); // 💡 Middleware para leer JSON en req.body
 const PORT = 3000;
 
 app.use(express.json());

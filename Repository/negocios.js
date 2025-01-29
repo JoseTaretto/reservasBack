@@ -10,13 +10,13 @@ const negocioSchema = mongoose.Schema(
             type: String,
             required: true
         },
-        datatime: {
+        datetime: {
             type: String,
-            required: true
+            required: false
         },
         img: {
             type: String,
-            required: true
+            required: false
         }        
     }
 )
