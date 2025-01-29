@@ -25,12 +25,20 @@ exports.getNegociosId = async (id)=>{
 
 exports.postNegocios = async (_id, name, datetime, img)=>{
     try {
-        let negocio1 = new Negocio (_id, name, datetime, img)
-        await negocio1.save();
-        return true;
+        let negocio = new Negocio (_id, name, datetime, img)
+        await negocio.save();
+        return negocio;
     } 
     catch (error) {
-        console.log(error+ 'repo');
         throw error; // Retorna el error para que el controlador lo maneje
+    }
+}
+
+exports.updateNegocio = async ({name, datetime, img }, id)=>{
+    try {
+        return await Negocio.findOneAndReplace({_id:id},{name, datetime, img})
+    } 
+    catch (error) {
+        console.log(error);
     }
 }

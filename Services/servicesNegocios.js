@@ -22,13 +22,22 @@ exports.getNegocio = async (id) => {
 
 exports.postNegocio = async ( _id, name, datetime, img) => {
   try {
-    console.log('lleguen al service')
-    await repositoryNegocios.postNegocios(_id, name, datetime, img);
-    return true;
+    negocio = await repositoryNegocios.postNegocios(_id, name, datetime, img);
+    return negocio;
+  } 
+  catch (error) {
+    throw error;
+  }
+}
+
+exports.updateNegocio = async ({name, datetime, img }, id) => {
+  try {
+    
+    let negocio = await repositoryNegocios.updateNegocio({ name, datetime, img }, id);
+    return negocio;
   } 
   catch (error) {
     console.log(error);
-    throw error;
   }
 }
 

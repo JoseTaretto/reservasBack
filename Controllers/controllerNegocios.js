@@ -20,19 +20,32 @@ exports.readNegocioId = async (req, res)=>{
         return res.status(200).send(negocio);   
     } catch (error) {
         console.log(error);
-        return res.status(500).send({ mensaje: "Hubo un error al intentar obtener el negocio1" })
+        return res.status(500).send({ mensaje: "Hubo un error al intentar obtener el negocio" })
     }
 }
 
-exports.postNegocioId = async (req,res)=>{
+exports.postNegocio = async (req,res)=>{
     try{
         const { _id, name, datetime, img } = req.body;
         let negocio =  await servicesNegocio.postNegocio({ _id, name, datetime, img })
-        res.status(201).json({ message: 'Negocio agregado con éxito', agregado: nuevoNegocio.name });
+        res.status(201).json({ message: 'Negocio agregado con éxito', agregado: negocio.name });
     }
     catch (error) {
-        console.log(error + 'asdasd');
         return res.status(500).send({ mensaje: "Hubo un error al intentar crear el negocio", error: error.message });
     }
 }
+
+exports.updateNegocio = async (req,res)=>{
+    try{
+        let id = req.params.id;
+        const {name, datetime, img } = req.body;
+        let negocioUpdate = await servicesNegocio.updateNegocio({name, datetime, img }, id) ;
+        res.status(201).json({ message: 'Negocio actulizado con éxito', agregado: negocioUpdate.name });
+    }
+    catch (error) {
+        return res.status(500).send({ mensaje: "Hubo un error al actulizado crear el negocio", error: error.message });
+    }
+}
+
+
 

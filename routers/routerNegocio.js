@@ -5,7 +5,8 @@ const routerNegocios = express.Router();
 
 routerNegocios.get('/', negocioController.readAllnegocios)
 routerNegocios.get('/:id', negocioController.readNegocioId);
-routerNegocios.post('/',negocioController.postNegocioId);
+routerNegocios.post('/', negocioController.postNegocio);
+routerNegocios.put('/:id', negocioController.updateNegocio);
 
 routerNegocios.delete('/:id', async (req, res) => {
   const negocioId = parseInt(req.params.id);
