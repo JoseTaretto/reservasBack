@@ -2,7 +2,6 @@ const { error } = require('console');
 const servicesNegocio = require ('../Services/servicesNegocios')
 
 exports.readAllnegocios = async (req, res)=>{
-
     try {
         let negocios = await servicesNegocio.getAllNegocios();
         return res.status(200).send(negocios);
@@ -10,7 +9,6 @@ exports.readAllnegocios = async (req, res)=>{
     catch (error) {
         return error
     }
-
 }
 
 exports.readNegocioId = async (req, res)=>{
@@ -48,4 +46,15 @@ exports.updateNegocio = async (req,res)=>{
 }
 
 
-
+exports.deleteNegocio = async (req, res)=>{
+    try{
+        let negocio = await servicesNegocio.deleteNegocio(req.params.id) ;
+        if (result.error) {
+            return res.status(404).json({ message: result.error });
+        }
+        res.status(200).json({ message: result.message });   
+    } catch (error) {
+        console.log(error);
+        return res.status(500).send({ mensaje: "Hubo un error al intentar obtener el negocio" })
+    }
+}

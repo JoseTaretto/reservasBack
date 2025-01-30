@@ -31,8 +31,7 @@ exports.postNegocio = async ( _id, name, datetime, img) => {
 }
 
 exports.updateNegocio = async ({name, datetime, img }, id) => {
-  try {
-    
+  try {    
     let negocio = await repositoryNegocios.updateNegocio({ name, datetime, img }, id);
     return negocio;
   } 
@@ -41,4 +40,13 @@ exports.updateNegocio = async ({name, datetime, img }, id) => {
   }
 }
 
+exports.deleteNegocio = async (id) => {
+  try {
+    let negocioId = await repositoryNegocios.deleteNegocios(id);
+    return negocioId;
+  } 
+  catch (error) {
+    console.log(error);
+  }
+}
 

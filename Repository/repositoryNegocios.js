@@ -42,3 +42,17 @@ exports.updateNegocio = async ({name, datetime, img }, id)=>{
         console.log(error);
     }
 }
+
+exports.deleteNegocios = async (id) => {
+    try {
+        const negocio = await Negocio.findByIdAndDelete(id);
+        if (!negocio) {
+            return { error: 'Negocio no encontrado' };
+        }
+        return { message: 'Negocio eliminado con éxito' };
+    } 
+    catch (error) {
+        console.error(error);
+        return { error: 'Error al eliminar el negocio' };
+    }
+};
